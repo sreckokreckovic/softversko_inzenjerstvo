@@ -1,0 +1,36 @@
+import customtkinter as ctk
+
+def show_book_list():
+    books = [
+        "Na Drini ćuprija - Ivo Andrić",
+        "iz baze.....",
+    ]
+
+    frame = ctk.CTkFrame(root)
+    frame.grid(row=1, column=0, sticky="nsew", padx=10, pady=10)
+
+    book_list = ctk.CTkTextbox(frame, height=250, width=400)
+    book_list.grid(row=0, column=0, sticky="nsew")
+
+    for book in books:
+        book_list.insert("end", book + "\n")
+
+    scrollbar = ctk.CTkScrollbar(frame, orientation="vertical", command=book_list.yview)
+    book_list.configure(yscrollcommand=scrollbar.set)
+    scrollbar.grid(row=0, column=1, sticky="ns")
+
+def main():
+    ctk.set_appearance_mode("dark")
+    ctk.set_default_color_theme("dark-blue")
+
+    global root
+    root = ctk.CTk()
+    root.title("Glavni Prozor")
+
+    open_button = ctk.CTkButton(root, text="Prikaži knjige", command=show_book_list)
+    open_button.grid(row=0, column=0, padx=20, pady=20)
+
+    root.mainloop()
+
+if __name__ == "__main__":
+    main()
