@@ -11,7 +11,6 @@ from tkinter.messagebox import *
 from projekatdb import Database
 
 
-
 c.set_appearance_mode("dark")
 c.set_default_color_theme("dark-blue")
 
@@ -49,10 +48,11 @@ class Login(c.CTkFrame):
         self.button_frame = c.CTkFrame(self.master)
         self.button_frame.pack()
 
-        
-
         self.show_books = c.CTkButton(
             self.button_frame, width=220, text="Pregledaj knjige bez registracije", font=('Verdana', 15))
+        self.show_books.pack(side=tk.LEFT, padx=10, pady=10)
+        self.show_books = c.CTkButton(
+            self.button_frame, width=220, text="Nemate nalog? Registrujte se", font=('Verdana', 15), command=self.open_registration)
         self.show_books.pack(side=tk.LEFT, padx=10, pady=10)
 
     def create_element(self, frame, text, row, show=None):
@@ -62,27 +62,37 @@ class Login(c.CTkFrame):
         entry.grid(row=row, column=1, padx=(10, 50), pady=30, sticky='w')
         return entry
 
+    def open_registration(self):
+        from registration import Registration
+        db = Database("library_software.db")
+        app = Registration(db)
+        app.mainloop()
+        self.destroy()
+
     def login(self):
         email = self.email.get()
         password = self.password.get()
         user = self.db.login_user(email, password)
 
         if not email or not password:
-            messagebox.showerror(title='Greška', message='Morate popuniti sva polja')
+            tk.messagebox.showerror(
+                title='Greška', message='Morate popuniti sva polja')
             return
 
         try:
             user = self.db.login_user(email, password)
             if user is not None:
-                tk.messagebox.showinfo(title='Obavještenje', message='Uspješno ste se prijavili')
+                tk.messagebox.showinfo(
+                    title='Obavještenje', message='Uspješno ste se prijavili')
             else:
                 print(user)
-                tk.messagebox.showerror(title='Greška', message='Pogrešno korisničko ime ili lozinka')
-            
+                tk.messagebox.showerror(
+                    title='Greška', message='Pogrešno korisničko ime ili lozinka')
+
         except Exception as e:
             print("Greška prilikom prijave:", e)
-            tk.messagebox.showerror(title='Greška', message='Pogrešno korisničko ime ili lozinka')
-    
+            tk.messagebox.showerror(
+                title='Greška', message='Pogrešno korisničko ime ili lozinka')
 
 
 if __name__ == "__main__":
