@@ -54,6 +54,9 @@ class Login(c.CTkFrame):
         self.show_books = c.CTkButton(
             self.button_frame, width=220, text="Nemate nalog? Registrujte se", font=('Verdana', 15), command=self.open_registration)
         self.show_books.pack(side=tk.LEFT, padx=10, pady=10)
+        self.show_books = c.CTkButton(
+            self.button_frame, width=220, text="Pocetna stranica", font=('Verdana', 15), command=self.open_main)
+        self.show_books.pack(side=tk.LEFT, padx=10, pady=10)
 
     def create_element(self, frame, text, row, show=None):
         label = c.CTkLabel(frame, text=text, font=('Verdana', 18))
@@ -68,6 +71,12 @@ class Login(c.CTkFrame):
         app = Registration(db)
         app.mainloop()
         self.destroy()
+    def open_main(self):
+        from main import Pocetni
+        app = Pocetni()
+        self.destroy()
+        app.mainloop()
+        
 
     def login(self):
         email = self.email.get()
