@@ -48,4 +48,11 @@ class Database:
         self.cr.execute("SELECT * FROM users WHERE email = ? AND password = ?", (email, password))
         user = self.cr.fetchone()
         return user
+    def add_book(self,name,author,year,description,available,genre):
+        self.cr.execute("INSERT INTO books (name,author,year,description,available,genre) VALUES (?,?,?,?,?,?,?)", (name,author,year,description,available,genre))
+        self.con.commit()
+    def delete_book(self,id):
+        self.cr.execute("DELETE FROM books WHERE book_id=?",(id,))
+        self.con.commit()
+    
         
