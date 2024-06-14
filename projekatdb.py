@@ -38,6 +38,14 @@ class Database:
         
         """
         self.cr.execute(books_sql)
+        reservations_sql = """
+        CREATE TABLE IF NOT EXISTS reservations(
+            reservation_id INTEGER PRIMARY KEY AUTOINCREMENT,
+            book_id INT NOT NULL,
+            user_id INT NOT NULL
+            )
+        """
+        self.cr.execute(reservations_sql)
         self.con.commit()
         
     def register_user(self,name,surname,age,contact,email,password,is_admin):
@@ -49,10 +57,26 @@ class Database:
         user = self.cr.fetchone()
         return user
     def add_book(self,name,author,year,description,available,genre):
-        self.cr.execute("INSERT INTO books (name,author,year,description,available,genre) VALUES (?,?,?,?,?,?,?)", (name,author,year,description,available,genre))
+        self.cr.execute("INSERT INTO books (name,author,year,description,available,genre) VALUES (?,?,?,?,?,?)", (name,author,year,description,available,genre))
         self.con.commit()
     def delete_book(self,id):
         self.cr.execute("DELETE FROM books WHERE book_id=?",(id,))
         self.con.commit()
-    
+        return 1
+    def add_reservation(self,book_id,user_id):
+        self.cr.execute("INSERT INTO reservations(book_id,user_id) VALUES(?,?)",(book_id,user_id))
+        self.cr.execute("UPDATE books SET available=? WHERE book_id=?",(0,book_id))
+        self.con.commit()
+    def return_book(self,book_id,user_id):
+        self.cr.execute("DELETE FROM reservations WHERE book_id=? AND user_id=?",(book_id,user_id))
+        self.cr.execute("UPDATE books SET available=? WHERE book_id=?",(1,book_id))
+        self.con.commit()
+    def available_books(self):
+        self.cr.execute("SELECT * FROM books WHERE available=?",(1,))
+        available_books = self.cr.fetchall()
+        return available_books
+    def get_book_by_id(self, book_id):
+        self.cr.execute("SELECT * FROM BOOKS WHERE book_id = ?", (book_id,))
+        return self.cr.fetchone()
+        
         

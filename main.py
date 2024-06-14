@@ -56,7 +56,10 @@ class Pocetni(c.CTk):
         app.mainloop()
 
     def open_books(self):
-        pass
+        from show_books import ShowBooks
+        app  = ShowBooks()
+        self.destroy()
+        app.mainloop()
 
     def open_info(self):
         pass

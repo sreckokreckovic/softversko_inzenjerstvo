@@ -7,7 +7,6 @@ Created on Mon Jun 10 21:33:58 2024
 
 import tkinter as tk
 import customtkinter as c
-from tkinter.messagebox import *
 from projekatdb import Database
 
 
@@ -48,9 +47,7 @@ class Login(c.CTkFrame):
         self.button_frame = c.CTkFrame(self.master)
         self.button_frame.pack()
 
-        self.show_books = c.CTkButton(
-            self.button_frame, width=220, text="Pregledaj knjige bez registracije", font=('Verdana', 15))
-        self.show_books.pack(side=tk.LEFT, padx=10, pady=10)
+        
         self.show_books = c.CTkButton(
             self.button_frame, width=220, text="Nemate nalog? Registrujte se", font=('Verdana', 15), command=self.open_registration)
         self.show_books.pack(side=tk.LEFT, padx=10, pady=10)
@@ -69,13 +66,26 @@ class Login(c.CTkFrame):
         from registration import Registration
         db = Database("library_software.db")
         app = Registration(db)
+        self.master.destroy()
         app.mainloop()
-        self.destroy()
+        
     def open_main(self):
         from main import Pocetni
         app = Pocetni()
-        self.destroy()
+        self.master.destroy()
         app.mainloop()
+    def open_admin_panel(self):
+        from admin_panel import Admin
+        app = Admin()
+        self.master.destroy()
+        app.mainloop()
+    def open_user_panel(self):
+        from user_panel import KorisnickiPanel
+        app = KorisnickiPanel()
+        self.master.destroy()
+        app.mainloop()
+        
+        
         
 
     def login(self):
@@ -91,8 +101,10 @@ class Login(c.CTkFrame):
         try:
             user = self.db.login_user(email, password)
             if user is not None:
-                tk.messagebox.showinfo(
-                    title='Obavještenje', message='Uspješno ste se prijavili')
+                if user[7]:
+                    self.open_admin_panel()
+                else:
+                    self.open_user_panel()
             else:
                 print(user)
                 tk.messagebox.showerror(

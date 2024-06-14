@@ -53,12 +53,11 @@ class Registration(c.CTk):
         self.login_b = c.CTkButton(self.button_frame, text="Imate već nalog? Prijavite se", font=(
             'Verdana', 15), width=200, command=self.open_login_window)
         self.login_b.grid(row=0, column=0, padx=10)
-        self.all_books = c.CTkButton(
-            self.button_frame, text="Pogledajte knjige", font=('Verdana', 15), width=220)
-        self.all_books.grid(row=0, column=1, padx=10)
+        
         self.show_main = c.CTkButton(
             self.button_frame, text="Pocetna", font=('Verdana', 15), width=220,command = self.open_main)
         self.show_main.grid(row=0, column=2, padx=10)
+        
 
     def register(self):
         name = self.name.get()
@@ -109,6 +108,12 @@ class Registration(c.CTk):
         app = Pocetni()
         self.destroy()
         app.mainloop()
+    def open_books(self):
+        from show_books import ShowBooks
+        app  = ShowBooks()
+        self.destroy()
+        app.mainloop()
+    
         
 
 if __name__ == "__main__":
