@@ -39,7 +39,7 @@ class Login(c.CTkFrame):
 
         self.email = self.create_element(self.frame, "Email", 0)
         self.password = self.create_element(
-            self.frame, "Password", 1, show="*")
+            self.frame, "Sifra", 1, show="*")
         self.login_b = c.CTkButton(
             self.frame, text='Prijavi se', command=self.login, width=200, font=('Verdana', 15))
         self.login_b.grid(row=2, column=0, columnspan=2, pady=50)

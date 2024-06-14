@@ -30,7 +30,7 @@ class Pocetni(c.CTk):
             'Verdana', 20), command=self.open_registration)
         self.register_btn.grid(row=0, column=0, padx=50, pady=50)
 
-        self.login_btn = c.CTkButton(self.frame_buttons, text='Login', width=200, height=50, font=(
+        self.login_btn = c.CTkButton(self.frame_buttons, text='Prijava', width=200, height=50, font=(
             'Verdana', 20), command=self.open_login)
         self.login_btn.grid(row=0, column=1, padx=50, pady=50)
 

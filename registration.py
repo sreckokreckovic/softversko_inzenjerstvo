@@ -37,13 +37,13 @@ class Registration(c.CTk):
             self.frame.grid_rowconfigure(i, weight=1)
             self.frame.grid_columnconfigure(0, weight=1, pad=100)
             self.frame.grid_columnconfigure(1, weight=2)
-        self.name = self.create_elements(self.frame, "Name", 0)
-        self.surname = self.create_elements(self.frame, "Surname", 1)
-        self.age = self.create_elements(self.frame, "Age", 2)
-        self.contact = self.create_elements(self.frame, "Contact", 3)
+        self.name = self.create_elements(self.frame, "Ime", 0)
+        self.surname = self.create_elements(self.frame, "Prezime", 1)
+        self.age = self.create_elements(self.frame, "Godine", 2)
+        self.contact = self.create_elements(self.frame, "Kontakt", 3)
         self.email = self.create_elements(self.frame, "Email", 4)
         self.password = self.create_elements(
-            self.frame, "Password", 5, show='*')
+            self.frame, "Sifra", 5, show='*')
         self.register_b = c.CTkButton(
             self.frame, text='Registruj se', command=self.register, width=200, font=('Verdana', 15))
         self.register_b.grid(row=6, column=0, columnspan=2, pady=10)
