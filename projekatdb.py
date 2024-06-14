@@ -77,14 +77,22 @@ class Database:
         self.cr.execute("DELETE FROM books WHERE book_id=?",(id,))
         self.con.commit()
         return 1
-    def add_reservation(self,book_id,user_id):
-        self.cr.execute("INSERT INTO reservations(book_id,user_id) VALUES(?,?)",(book_id,user_id))
-        self.cr.execute("UPDATE books SET available=? WHERE book_id=?",(0,book_id))
-        self.con.commit()
-    def return_book(self,book_id,user_id):
-        self.cr.execute("DELETE FROM reservations WHERE book_id=? AND user_id=?",(book_id,user_id))
-        self.cr.execute("UPDATE books SET available=? WHERE book_id=?",(1,book_id))
-        self.con.commit()
+    def add_reservation(self,book_id,email):
+        self.cr.execute("SELECT user_id FROM users WHERE email=?", (email,))
+        user_id = self.cr.fetchone()
+        if user_id is not None:
+            user_id = user_id[0]
+            self.cr.execute("INSERT INTO reservations(book_id,user_id) VALUES(?,?)",(book_id,user_id))
+            self.cr.execute("UPDATE books SET available=? WHERE book_id=?",(0,book_id))
+            self.con.commit()
+    def return_book(self,book_id,email):
+        self.cr.execute("SELECT user_id FROM users WHERE email=?", (email,))
+        user_id = self.cr.fetchone()
+        if user_id is not None:
+            user_id = user_id[0]
+            self.cr.execute("DELETE FROM reservations WHERE book_id=? AND user_id=?",(book_id,user_id))
+            self.cr.execute("UPDATE books SET available=? WHERE book_id=?",(1,book_id))
+            self.con.commit()
     def available_books(self):
         self.cr.execute("SELECT * FROM books WHERE available=?",(1,))
         available_books = self.cr.fetchall()

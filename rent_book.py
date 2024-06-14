@@ -38,11 +38,11 @@ class RentBook(c.CTk):
         self.frame.grid_columnconfigure(0, weight=1, pad=20)
         self.frame.grid_columnconfigure(1, weight=2)
         
-        self.user_id_label = c.CTkLabel(self.frame, text="ID korisnika")
-        self.user_id_label.grid(row=0, column=0, padx=15, pady=15, sticky='we')
+        self.user_email_label = c.CTkLabel(self.frame, text="Email korisnika")
+        self.user_email_label.grid(row=0, column=0, padx=15, pady=15, sticky='we')
 
-        self.user_id_entry = c.CTkEntry(self.frame, width=300)
-        self.user_id_entry.grid(row=0, column=1, padx=15, pady=15, sticky='w')
+        self.user_email_entry = c.CTkEntry(self.frame, width=300)
+        self.user_email_entry.grid(row=0, column=1, padx=15, pady=15, sticky='w')
 
         self.book_id_label = c.CTkLabel(self.frame, text="ID knjige")
         self.book_id_label.grid(row=1, column=0, padx=15, pady=15, sticky='we')
@@ -59,19 +59,19 @@ class RentBook(c.CTk):
 
     def rent_book(self):
         book_id = self.book_id_entry.get()
-        user_id = self.user_id_entry.get()
+        email = self.user_email_entry.get()
 
-        if not book_id and not user_id:
+        if not book_id and not email:
             tk.messagebox.showerror(
                 title='Greška', message='Morate popuniti sva polja')
             return
 
         try:
-            self.db.add_reservation(book_id, user_id)
+            self.db.add_reservation(book_id, email)
             tk.messagebox.showinfo(
                     title='Rezervacija', message='Uspjesno rezervisano')
             self.book_id_entry.delete(0, 'end')
-            self.user_id_entry.delete(0, 'end')
+            self.user_email_entry.delete(0, 'end')
         except Exception as e:
             tk.messagebox.showerror(
                 title='Greška', message=f'Došlo je do greške: {e}')
