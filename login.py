@@ -19,7 +19,7 @@ class Login(c.CTkFrame):
         super().__init__(master)
         self.db = db
         self.master = master
-        self.master.title("Prijava")
+        self.master.title("Softver za biblioteku")
         self.master.geometry("1080x720")
 
         self.grid_columnconfigure(0, weight=1)

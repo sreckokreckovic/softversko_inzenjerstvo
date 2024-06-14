@@ -7,7 +7,7 @@ from user_panel import KorisnickiPanel
 class ShowBooks(tk.Tk):
     def __init__(self):
         super().__init__()
-        self.title("Glavni Prozor")
+        self.title("Softver za biblioteku")
         self.geometry("1080x720")
 
         self.show_book_list()

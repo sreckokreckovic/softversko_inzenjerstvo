@@ -15,7 +15,7 @@ class DeleteBook(c.CTk):
         self.db = db
         self.master = master
 
-        self.title("Obriši Knjigu")
+        self.title("Softver za biblioteku")
         self.geometry("1080x720")
         self.grid_columnconfigure(0, weight=1)
         self.grid_rowconfigure(0, weight=1)
