@@ -46,7 +46,21 @@ class Database:
             )
         """
         self.cr.execute(reservations_sql)
+        
+        comments_sql = """
+        CREATE TABLE IF NOT EXISTS comments(
+            comment_id INTEGER PRIMARY KEY AUTOINCREMENT,
+            title TEXT NOT NULL,
+            text TEXT NOT NULL
+            )
+        """
+        self.cr.execute(comments_sql)
         self.con.commit()
+        
+    def add_comment(self,title,text):
+        self.cr.execute("INSERT INTO comments(title,text) VALUES(?,?)",(title,text))
+        self.cr.commit()
+        
         
     def register_user(self,name,surname,age,contact,email,password,is_admin):
         self.cr.execute("INSERT INTO users (name, surname, age, contact, email, password, is_admin) VALUES (?,?,?,?,?,?,?)", (name, surname, age, contact, email, password, is_admin))
