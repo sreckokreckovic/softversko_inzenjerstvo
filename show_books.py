@@ -11,31 +11,11 @@ class ShowBooks(tk.Tk):
         self.geometry("1080x720")
 
         self.show_book_list()
-        self.create_buttons()
+        
 
     def show_book_list(self):
         books_window = BookListWindow(self)
         books_window.pack(side=tk.LEFT, fill=tk.BOTH)
-
-    def create_buttons(self):
-        button_frame = ctk.CTkFrame(self)
-        button_frame.pack(side=tk.BOTTOM, pady=20)
-
-        admin_panel_button = ctk.CTkButton(button_frame, text="Admin Panel", width=150, height=40, command=self.open_admin_panel)
-        admin_panel_button.grid(row=0, column=0, padx=10)
-
-        user_panel_button = ctk.CTkButton(button_frame, text="User Panel", width=150, height=40, command=self.open_user_panel)
-        user_panel_button.grid(row=0, column=1, padx=10)
-
-    def open_admin_panel(self):
-        admin_app = Admin()
-        self.destroy()
-        admin_app.mainloop()
-
-    def open_user_panel(self):
-        user_app = KorisnickiPanel()
-        self.destroy()
-        user_app.mainloop()
 
 class BookListWindow(tk.Frame):
     def __init__(self, master):
