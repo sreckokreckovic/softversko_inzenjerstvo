@@ -9,6 +9,7 @@ class ShowBooks(tk.Tk):
         super().__init__()
         self.title("Softver za biblioteku")
         self.geometry("1080x720")
+        self.iconbitmap("books_97178.ico")
 
         self.show_book_list()
         

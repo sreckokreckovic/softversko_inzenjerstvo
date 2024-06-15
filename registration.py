@@ -20,6 +20,8 @@ class Registration(c.CTk):
         super().__init__(master)
         self.db = db
         self.master = master
+        self.iconbitmap("books_97178.ico")
+        
 
         self.title("Softver za biblioteku")
         self.geometry("1080x720")

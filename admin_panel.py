@@ -16,6 +16,7 @@ class Admin(c.CTk):
         super().__init__()
         self.title("Softver za biblioteku")
         self.geometry("1080x720")
+        self.iconbitmap("books_97178.ico")
 
         self.frame_title = c.CTkFrame(self)
         self.frame_title.grid(row=0, column=0, pady=(50, 0))

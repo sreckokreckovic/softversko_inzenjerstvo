@@ -15,6 +15,7 @@ class AddBook(c.CTk):
         self.master = master
 
         self.title("Softver za biblioteku")
+        self.iconbitmap("books_97178.ico")
         self.geometry("1080x720")
         self.grid_columnconfigure(0, weight=1)
         self.grid_rowconfigure(0, weight=1)

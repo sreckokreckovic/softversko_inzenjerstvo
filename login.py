@@ -18,6 +18,7 @@ class Login(c.CTkFrame):
     def __init__(self, db, master=None):
         super().__init__(master)
         self.db = db
+        self.master.iconbitmap("books_97178.ico")
         self.master = master
         self.master.title("Softver za biblioteku")
         self.master.geometry("1080x720")
