@@ -39,8 +39,8 @@ class Pocetni(c.CTk):
                                     width=200, height=50, font=('Verdana', 20), command=self.open_books)
         self.show_btn.grid(row=1, column=0, padx=50, pady=50)
 
-        self.info_btn = c.CTkButton(self.frame_buttons, text='O nama', width=200, height=50, font=(
-            'Verdana', 20), command=self.open_info)
+        self.info_btn = c.CTkButton(self.frame_buttons, text='Dodaj komentar', width=200, height=50, font=(
+            'Verdana', 20), command=self.add_comment)
         self.info_btn.grid(row=1, column=1, padx=50, pady=50)
 
     def open_login(self):
@@ -62,8 +62,12 @@ class Pocetni(c.CTk):
         self.destroy()
         app.mainloop()
 
-    def open_info(self):
-        pass
+    def add_comment(self):
+        from add_comment import AddComment
+        db = Database("library_software.db")
+        app = AddComment(db)
+        self.destroy()
+        app.mainloop()
 
 
 if __name__ == "__main__":

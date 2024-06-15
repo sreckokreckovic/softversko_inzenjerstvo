@@ -59,7 +59,7 @@ class Database:
         
     def add_comment(self,title,text):
         self.cr.execute("INSERT INTO comments(title,text) VALUES(?,?)",(title,text))
-        self.cr.commit()
+        self.con.commit()
         
         
     def register_user(self,name,surname,age,contact,email,password,is_admin):
